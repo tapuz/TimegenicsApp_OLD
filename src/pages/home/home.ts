@@ -3,6 +3,7 @@ import { NavController, LoadingController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
+import { AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -11,12 +12,28 @@ import { File } from '@ionic-native/file';
 export class HomePage {
 
   myphoto:any;
+  patientID:any;
 
-  constructor(public navCtrl: NavController, private camera: Camera, private transfer: FileTransfer, private file: File, private loadingCtrl:LoadingController) {
+  constructor(public navCtrl: NavController, private camera: Camera, private transfer: FileTransfer, private file: File, private loadingCtrl:LoadingController,private alertCtrl: AlertController) {
 
   }
 
+  presentAlert(title) {
+  let alert = this.alertCtrl.create({
+    title: title
+    //subTitle: '10% of battery remaining',
+    //buttons: ['Dismiss']
+  });
+  alert.present();
+}
+
   takePhoto(){
+    //check if patientID was entered
+    this.presentAlert(this.patientID);
+    if (this.patientID == ''){
+      this.presentAlert('Enter patientID first');
+      return;
+    }
     const options: CameraOptions = {
       quality: 70,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -30,6 +47,7 @@ export class HomePage {
       this.myphoto = 'data:image/jpeg;base64,' + imageData;
       //upload the photo
       this.uploadImage();
+      this.presentAlert('Upload done');
     }, (err) => {
       // Handle error
     });
@@ -47,6 +65,7 @@ export class HomePage {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64:
       this.myphoto = 'data:image/jpeg;base64,' + imageData;
+      this.uploadImage();
     }, (err) => {
       // Handle error
     });
@@ -78,7 +97,7 @@ export class HomePage {
       content: "Uploading..."
     });
     loader.present();
-    var patientID = 3;
+    //var patientID = 3;
 
     //create file transfer object
     const fileTransfer: FileTransferObject = this.transfer.create();
@@ -90,12 +109,12 @@ export class HomePage {
     //option transfer
     let options: FileUploadOptions = {
       fileKey: 'photo',
-      fileName: patientID + "_" + random + ".jpg",
+      fileName: this.patientID + "_" + random + ".jpg",
       chunkedMode: false,
       httpMethod: 'post',
       mimeType: "image/jpeg",
       headers: {},
-      params:{'patientID':patientID}
+      params:{'patientID':this.patientID}
     }
 
 

@@ -7,11 +7,15 @@
 </ion-header>
 
 <ion-content padding>
- 
+  <ion-item>
+    <ion-label color="primary">PatientID</ion-label>
+    <ion-input [(ngModel)]="patientID" placeholder="Enter ID"></ion-input>
+  </ion-item>
+
   <button ion-button (click)="takePhoto()" full color="primary">Take Photo</button>
-  <button ion-button (click)="getImage()" full color="secondary">Get Photo From Library</button>
+  <!--<button ion-button (click)="getImage()" full color="secondary">Get Photo From Library</button>
   <button ion-button (click)="cropImage()" full color="danger">Crop Image</button>
-  <button ion-button (click)="uploadImage()" full color="dark">Upload Image</button>
+  <button ion-button (click)="uploadImage()" full color="dark">Upload Image</button>-->
 
   <p align="center"><img src="{{ myphoto }}"></p>
 </ion-content>
