@@ -46,7 +46,7 @@ export class HomePage {
       this.myphoto = 'data:image/jpeg;base64,' + imageData;
       //upload the photo
       this.uploadImage();
-      this.presentAlert('Upload done');
+      
     }, (err) => {
       // Handle error
     });
@@ -127,7 +127,7 @@ export class HomePage {
 				//this.progress = perc;
 		    });
 
-    fileTransfer.upload(this.myphoto, 'http://192.168.0.2/alice/app/api.php?task=upload_image', options)
+    fileTransfer.upload(this.myphoto, 'https://dev.rugcentrumgent.be/alice/pre/api.php?task=upload_image', options)
       .then((data) => {
         //alert("Success");
         console.log('done');
