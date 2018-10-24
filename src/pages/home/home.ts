@@ -132,6 +132,7 @@ export class HomePage {
         //alert("Success");
         console.log('done');
         loader.dismiss();
+        this.presentAlert('Upload done');
       }, (err) => {
         console.log(err.code);
         //alert("Error");
