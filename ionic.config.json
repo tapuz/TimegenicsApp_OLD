@@ -1,5 +1,5 @@
 {
-  "name": "TestCamera",
+  "name": "APMCam",
   "integrations": {
     "cordova": {}
   },
