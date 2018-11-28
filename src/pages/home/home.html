@@ -12,10 +12,25 @@
     <ion-input [(ngModel)]="patientID" placeholder="Enter ID"></ion-input>
   </ion-item>
 
-  <button ion-button (click)="takePhoto()" full color="primary">Take Photo</button>
+  <button ion-button icon-start (click)="takePhoto()" full color="primary"><ion-icon name="camera"></ion-icon>Take Photo</button>
   <!--<button ion-button (click)="getImage()" full color="secondary">Get Photo From Library</button>
   <button ion-button (click)="cropImage()" full color="danger">Crop Image</button>
   <button ion-button (click)="uploadImage()" full color="dark">Upload Image</button>-->
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6 col-md-4 col-xl-3 *ngFor="let picture of pictures">
+        <ion-card class="block">
+          <img [src]="picture" *ngIf="picture">
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <p align="center"><img src="{{ myphoto }}"></p>
+  <!--<p align="center"><img src="{{ myphoto }}"></p>-->
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>{{ footermsg }}</ion-title>
+  </ion-toolbar>
+</ion-footer>

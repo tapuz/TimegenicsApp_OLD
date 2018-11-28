@@ -4,17 +4,31 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { AlertController } from 'ionic-angular';
+import * as Config from '../../config';
+import * as io from 'socket.io-client';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-
+  base64Image:any;
   myphoto:any;
+  pictures=[];
   patientID:any;
+  data:any;
+  socket:any;
+  APMserver= "http://192.168.0.2:3000";
+  footermsg = "system ready...";
 
-  constructor(public navCtrl: NavController, private camera: Camera, private transfer: FileTransfer, private file: File, private loadingCtrl:LoadingController,private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private camera: Camera, private transfer: FileTransfer, private loadingCtrl:LoadingController,private alertCtrl: AlertController) {
+    //console.log("this is the shit: ", this.APMserver);
+    //this.socket = io(this.APMserver);
+    //this.socket.on("welcome", (message) => {
+     //          this.presentAlert(message);
+      //         console.log(message);
+    //});  
+
 
   }
 
@@ -25,10 +39,10 @@ export class HomePage {
     //buttons: ['Dismiss']
   });
   alert.present();
-}
+  }
 
   takePhoto(){
-    //check if patientID was entered
+    //check if patientID was enteredfdfsd
     const options: CameraOptions = {
       quality: 70,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -40,10 +54,13 @@ export class HomePage {
       correctOrientation:true
     }
 
-    this.camera.getPicture(options).then((imageData) => {
+    this.camera.getPicture(options).then((imageData) => { 
       // imageData is either a base64 encoded string or a file URI
       // If it's base64:
-      this.myphoto = 'data:image/jpeg;base64,' + imageData;
+      this.base64Image = 'data:image/jpeg;base64,' + imageData;
+      //push picture to array
+      this.pictures.push(this.base64Image);
+      this.pictures.reverse();
       //upload the photo
       this.uploadImage();
       
@@ -95,7 +112,8 @@ export class HomePage {
     let loader = this.loadingCtrl.create({
       content: "Uploading..."
     });
-    loader.present();
+    // this.footermsg = "Uploading.."
+    //loader.present();
     //var patientID = 3;
 
     //create file transfer object
@@ -119,20 +137,22 @@ export class HomePage {
 
     //file transfer action
     
-     fileTransfer.onProgress((progressEvent) => {
+    fileTransfer.onProgress((progressEvent) => {
 		      	//console.log(progressEvent);
 				var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
+        this.footermsg = "Uploading " + perc + "%";
         console.log(perc);
         //if (perc == 100) {loader.dismiss();}
 				//this.progress = perc;
 		    });
 
-    fileTransfer.upload(this.myphoto, 'https://dev.rugcentrumgent.be/alice/pre/api.php?task=upload_image', options)
+    fileTransfer.upload(this.base64Image, Config.APM_API_URL + '?task=upload_image', options)
       .then((data) => {
         //alert("Success");
         console.log('done');
-        loader.dismiss();
-        this.presentAlert('Upload done');
+        this.footermsg = "Upload done..."
+        //loader.dismiss();
+        //this.presentAlert('Upload done');
       }, (err) => {
         console.log(err.code);
         //alert("Error");
