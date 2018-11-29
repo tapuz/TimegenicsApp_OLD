@@ -19,7 +19,7 @@ export class HomePage {
   data:any;
   socket:any;
   APMserver= "http://192.168.0.2:3000";
-  footermsg = "system ready...";
+  footermsg = "system ready!";
 
   constructor(public navCtrl: NavController, private camera: Camera, private transfer: FileTransfer, private loadingCtrl:LoadingController,private alertCtrl: AlertController) {
     //console.log("this is the shit: ", this.APMserver);
