@@ -19,7 +19,7 @@ export class HomePage {
   data:any;
   socket:any;
   APMserver= "http://192.168.0.2:3000";
-  footermsg = "system ready!";
+  footermsg = "system ready..";
 
   constructor(public navCtrl: NavController, private camera: Camera, private transfer: FileTransfer, private loadingCtrl:LoadingController,private alertCtrl: AlertController) {
     //console.log("this is the shit: ", this.APMserver);
@@ -150,14 +150,14 @@ export class HomePage {
       .then((data) => {
         //alert("Success");
         console.log('done');
-        this.footermsg = "Upload done..."
+        //this.footermsg = "Upload done..."
         //loader.dismiss();
         //this.presentAlert('Upload done');
       }, (err) => {
         console.log(err.code);
         //alert("Error");
 
-        loader.dismiss();
+        //loader.dismiss();
       });
     
   }
