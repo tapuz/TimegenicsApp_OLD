@@ -2,21 +2,26 @@ import { Injectable } from '@angular/core';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Http, Headers } from '@angular/http';
 import * as Config from '../config';
+import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class AuthenticationService {
 
   constructor(
     public nativeStorage: NativeStorage,
-    public http: Http
+    public http: Http,
+    private storage: Storage
   ){}
 
   getUser(){
-    return this.nativeStorage.getItem('User');
+    return this.storage.get('User');
+    //return this.nativeStorage.getItem('User');
   }
 
   setUser(user){
-    return this.nativeStorage.setItem('User', user);
+    //return this.nativeStorage.setItem('User', user);
+    return this.storage.set('User', user);
+
   }
 
   logOut(){

@@ -108,4 +108,5 @@
         <variable name="MAX_STORE" value="2" />
         <variable name="MIN_BACKGROUND_DURATION" value="30" />
     </plugin>
+    <plugin name="cordova-sqlite-storage" spec="~2.6.0" />
 </widget>
