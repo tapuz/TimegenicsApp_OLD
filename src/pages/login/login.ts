@@ -37,13 +37,11 @@ export class LoginPage {
 
     this.authenticationService.doLogin(value.username, value.password)
     .subscribe(res => {
-        console.log(res.json());
        this.authenticationService.setUser({
          token: res.json().token,
          username: value.username,
          displayname: res.json().user_display_name,
          email: res.json().user_email
-         //id:res.json().ID,
        });
        console.log(res.json());
        loading.dismiss();

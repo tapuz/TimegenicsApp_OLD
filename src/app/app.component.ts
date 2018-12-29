@@ -21,10 +21,17 @@ export class MyApp {
       authenticationService.getUser()
       .then(
         data => {
+          //console.log('hier is the date : ' + data.token);
           authenticationService.validateAuthToken(data.token)
           .subscribe(
-            res => this.rootPage = HomePage,
-            err =>   this.rootPage = LoginPage
+            res => {
+              //console.log(res.json().data.status);
+              this.rootPage = HomePage
+            },
+            err =>  {
+             //console.log('auth resp:' + err.json()); 
+             this.rootPage = LoginPage
+            }
           )
         },
         err => this.rootPage = LoginPage
