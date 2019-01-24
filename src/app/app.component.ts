@@ -27,6 +27,7 @@ export class MyApp {
             res => {
               //console.log(res.json().data.status);
               this.rootPage = HomePage
+              
             },
             err =>  {
              //console.log('auth resp:' + err.json()); 

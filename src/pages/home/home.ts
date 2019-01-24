@@ -5,7 +5,13 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { File } from '@ionic-native/file';
 import { AlertController } from 'ionic-angular';
 import * as Config from '../../config';
-import * as io from 'socket.io-client';
+import io from 'socket.io-client';
+import { WordpressService } from '../../services/wordpress.service';
+
+import { Http, Headers } from '@angular/http';
+
+import { Observable } from 'rxjs/Observable';
+
 
 @Component({
   selector: 'page-home',
@@ -16,33 +22,83 @@ export class HomePage {
   myphoto:any;
   pictures=[];
   patientID:any;
-  data:any;
   socket:any;
   APMserver= "http://192.168.0.2:3000";
   footermsg = "system ready..";
+  activePatient: any;
+  patientName: string;
+  data:Observable<any>;
+  
+  
+  
 
-  constructor(public navCtrl: NavController, private camera: Camera, private transfer: FileTransfer, private loadingCtrl:LoadingController,private alertCtrl: AlertController) {
-    //console.log("this is the shit: ", this.APMserver);
-    //this.socket = io(this.APMserver);
-    //this.socket.on("welcome", (message) => {
-     //          this.presentAlert(message);
-      //         console.log(message);
-    //});  
+  constructor(
+    public navCtrl: NavController, 
+    private camera: Camera, 
+    private transfer: FileTransfer, 
+    private loadingCtrl:LoadingController,
+    private alertCtrl: AlertController,
+    public wordpressService: WordpressService,
+    public http: Http
+    )
+    {
+    console.log("this is the shit: ", this.APMserver);
+    this.socket = io(this.APMserver);
+    
+    console.log('socket ' + this.socket);
+    this.socket.on('connect_failed', function() {
+      console.log("connection failed!!");
+   });
+   this.socket.on('connect', function() {
+    console.log("connection OK!!");
+    });
+    this.socket.on("welcome", (message) => {
+      console.log('niets!!');
+               this.presentAlert(message);
+               console.log(message);
+    });  
 
+    //get the Acive Patient by ajax
+    this.getActivePatient();
 
+    
+    
+  }
+
+  getActivePatient(){
+
+        this.data = this.http.get('http://192.168.0.2/alice/app/api.php?task=getActivePatient&userEmail=thierry.duhameeuw@gmail.com').map(res => res.json());
+        this.data.subscribe(data => {
+        this.activePatient = data;
+        this.patientName = data.patient_surname + ' ' + data.patient_firstname;
+        this.patientID = data.patient_id;
+        
+        
+    });
+  }
+
+  refreshActivePatient(refresher) {
+    this.data.subscribe(data => {
+      this.activePatient = data;
+        this.patientName = data.patient_surname + ' ' + data.patient_firstname;
+        this.patientID = data.patient_id;
+        //clear the pictures
+        this.pictures = [];
+        refresher.complete();
+    });
+    
   }
 
   presentAlert(title) {
   let alert = this.alertCtrl.create({
     title: title
-    //subTitle: '10% of battery remaining',
-    //buttons: ['Dismiss']
+   
   });
   alert.present();
   }
 
   takePhoto(){
-    //check if patientID was enteredfdfsd
+    //check if patientID was entered
     const options: CameraOptions = {
       quality: 70,
       destinationType: this.camera.DestinationType.DATA_URL,

@@ -7,7 +7,12 @@ import 'rxjs/add/observable/forkJoin';
 
 @Injectable()
 export class WordpressService {
-  constructor(public http: Http){}
+  constructor(
+    public http: Http
+   )
+    {}
+
+
 
   getRecentPosts(categoryId:number, page:number = 1){
     //if we want to query posts by category
@@ -28,9 +33,9 @@ export class WordpressService {
     .map(res => res.json());
   }
 
-  getAuthor(author){
-    return this.http.get(Config.WORDPRESS_REST_API_URL + "users/" + author)
-    .map(res => res.json());
+  getUser(user){
+    return this.http.get(Config.WORDPRESS_REST_API_URL + "users/" + user);
+   // .map(res => res.json());
   }
 
   getPostCategories(post){
