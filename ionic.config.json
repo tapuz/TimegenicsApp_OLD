@@ -1,9 +1,9 @@
 {
-  "name": "APMCam",
+  "name": "APM",
   "integrations": {
     "cordova": {}
   },
   "type": "ionic-angular",
-  "pro_id": "e5fca7e8",
-  "id": "e5fca7e8"
+  "pro_id": "",
+  "id": "0fb0c73c"
 }
