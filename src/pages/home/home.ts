@@ -67,7 +67,7 @@ export class HomePage {
 
   getActivePatient(){
 
-        this.data = this.http.get('http://192.168.0.2/alice/app/api.php?task=getActivePatient&userEmail=thierry.duhameeuw@gmail.com').map(res => res.json());
+        this.data = this.http.get(Config.APM_API_URL + '?task=getActivePatient&userEmail=thierry.duhameeuw@gmail.com').map(res => res.json());
         this.data.subscribe(data => {
         this.activePatient = data;
         this.patientName = data.patient_surname + ' ' + data.patient_firstname;
@@ -118,6 +118,7 @@ export class HomePage {
       this.pictures.push(this.base64Image);
       this.pictures.reverse();
       //upload the photo
+      
       this.uploadImage();
       
     }, (err) => {
@@ -206,7 +207,7 @@ export class HomePage {
       .then((data) => {
         //alert("Success");
         console.log('done');
-        //this.footermsg = "Upload done..."
+        this.footermsg = "Upload done..."
         //loader.dismiss();
         //this.presentAlert('Upload done');
       }, (err) => {
