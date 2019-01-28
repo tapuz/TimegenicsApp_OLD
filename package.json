@@ -67,7 +67,7 @@
       "cordova-plugin-file-transfer": {},
       "cordova-plugin-file": {},
       "cordova-plugin-ionic": {
-        "APP_ID": "e5fca7e8",
+        "APP_ID": "0fb0c73c",
         "CHANNEL_NAME": "Production",
         "UPDATE_METHOD": "background",
         "UPDATE_API": "https://api.ionicjs.com",
