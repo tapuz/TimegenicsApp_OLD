@@ -8,6 +8,8 @@ import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
+import { PictureproofPage } from '../pages/pictureproof/pictureproof';
+import { DocscanPage } from '../pages/docscan/docscan';
 
 import { WordpressService } from '../services/wordpress.service';
 import { AuthenticationService } from '../services/authentication.service';
@@ -22,7 +24,10 @@ import { NativeStorage } from '@ionic-native/native-storage';
   declarations: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    PictureproofPage,
+    DocscanPage
+
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,9 @@ import { NativeStorage } from '@ionic-native/native-storage';
   entryComponents: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    PictureproofPage,
+    DocscanPage
   ],
   providers: [
     StatusBar,
