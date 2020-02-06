@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { NativeStorage } from '@ionic-native/native-storage';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { AlertController } from 'ionic-angular';
 import * as Config from '../../config';
 import io from 'socket.io-client';
 import { WordpressService } from '../../services/wordpress.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 import { Http, Headers } from '@angular/http';
 
@@ -33,17 +35,22 @@ export class PictureproofPage {
   
 
   constructor(
+    public nativeStorage: NativeStorage,
     public navCtrl: NavController, 
     private camera: Camera, 
     private transfer: FileTransfer, 
     private loadingCtrl:LoadingController,
     private alertCtrl: AlertController,
     public wordpressService: WordpressService,
-    public http: Http
+    public http: Http,
+    public authenticationService: AuthenticationService
+    
     )
     {
     console.log("this is the shit: ", this.APMserver);
     this.socket = io(this.APMserver);
+
+    
     
     console.log('socket ' + this.socket);
     this.socket.on('connect_failed', function() {
@@ -58,16 +65,23 @@ export class PictureproofPage {
                console.log(message);
     });  
 
+     authenticationService.getUser()
+      .then(
+        data => {
+          this.getActivePatient(data.email);
+        });
     //get the Acive Patient by ajax
-    this.getActivePatient();
+    
+    
 
     
     
   }
 
-  getActivePatient(){
+  getActivePatient(email){
+        
 
-        this.data = this.http.get(Config.APM_API_URL + '?task=getActivePatient&userEmail=thierry.duhameeuw@gmail.com').map(res => res.json());
+        this.data = this.http.get(Config.APM_API_URL + '?task=getActivePatient&userEmail='+email).map(res => res.json());
         this.data.subscribe(data => {
         this.activePatient = data;
         this.patientName = data.patient_surname + ' ' + data.patient_firstname;
