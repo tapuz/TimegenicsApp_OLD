@@ -1,18 +1,49 @@
-<!--
-  Generated template for the DocscanPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>docscan</ion-title>
+  <ion-navbar color="dark">
+    <ion-title>
+      DocScan
+    </ion-title>
   </ion-navbar>
-
 </ion-header>
 
+<ion-content padding class="bg">
+    <ion-refresher (ionRefresh)="refreshActivePatient($event);" pullMin="120" pullMax="180">
+        <ion-refresher-content 
+          pullingText="Pull to get active Patient"
+          pullingIcon="arrow-up"
+          refreshingSpinner="crescent">
 
-<ion-content padding>
+    </ion-refresher-content>
 
+     </ion-refresher>
+
+
+  <ion-item>
+    <ion-label color="primary">Patient</ion-label>
+    <ion-input  value="{{patientName}}" readonly></ion-input>
+
+  </ion-item>
+ 
+
+  <button style="margin-top: 30px" ion-button icon-start large (click)="takePhoto()" full color="primary"><ion-icon name="camera"></ion-icon></button>
+  <!--<button ion-button (click)="getImage()" full color="secondary">Get Photo From Library</button>
+  <button ion-button (click)="cropImage()" full color="danger">Crop Image</button>
+  <button ion-button (click)="uploadImage()" full color="dark">Upload Image</button>-->
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6 col-md-4 col-xl-3 *ngFor="let picture of pictures">
+        <ion-card class="block">
+          <img [src]="picture" *ngIf="picture">
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!--<p align="center"><img src="{{ myphoto }}"></p>-->
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>{{ footermsg }}</ion-title>
+  </ion-toolbar>
+</ion-footer>

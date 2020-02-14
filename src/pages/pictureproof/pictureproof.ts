@@ -80,13 +80,13 @@ export class PictureproofPage {
 
   getActivePatient(email){
         
-
+        console.log('this is the email: ' + email);
         this.data = this.http.get(Config.APM_API_URL + '?task=getActivePatient&userEmail='+email).map(res => res.json());
         this.data.subscribe(data => {
         this.activePatient = data;
         this.patientName = data.patient_surname + ' ' + data.patient_firstname;
         this.patientID = data.patient_id;
-        
+        console.log(data.patient_id + ' is the ids');
         
     });
   }
@@ -202,7 +202,7 @@ export class PictureproofPage {
       httpMethod: 'post',
       mimeType: "image/jpeg",
       headers: {},
-      params:{'patientID':this.patientID}
+      params:{'patientID':this.patientID,'tag':'camera'}
     }
 
 
