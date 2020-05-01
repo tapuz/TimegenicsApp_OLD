@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { HomePage } from '../home/home'
-//import { RegisterPage } from '../register/register'
 import { NavController, LoadingController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { WordpressService } from '../../services/wordpress.service';
@@ -20,7 +19,11 @@ export class LoginPage {
     public formBuilder: FormBuilder,
     public wordpressService: WordpressService,
     public authenticationService: AuthenticationService
-  ) {}
+  ) {
+    console.log('login page!!');
+
+
+  }
 
   ionViewWillLoad() {
     this.login_form = this.formBuilder.group({
@@ -50,7 +53,7 @@ export class LoginPage {
      err => {
        loading.dismiss();
        this.error_message = "Invalid credentials!";
-       console.log(err);
+       console.log('this is the error ' + err);
      })
   }
 

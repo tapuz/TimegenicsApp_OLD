@@ -15,6 +15,7 @@ export class AuthenticationService {
 
   getUser(){
     //return this.storage.get('User');
+    console.log('getting the user !!');
     return this.nativeStorage.getItem('User');
   }
 

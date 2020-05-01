@@ -21,16 +21,16 @@ export class MyApp {
       authenticationService.getUser()
       .then(
         data => {
-          //console.log('hier is the date : ' + data.token);
+          console.log('hier is the date : ' + data.token);
           authenticationService.validateAuthToken(data.token)
           .subscribe(
             res => {
-              //console.log(res.json().data.status);
+              console.log(res.json().data.status);
               this.rootPage = HomePage
               
             },
             err =>  {
-             //console.log('auth resp:' + err.json()); 
+             console.log('auth resp:' + err.json()); 
              this.rootPage = LoginPage
             }
           )
