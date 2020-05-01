@@ -23,10 +23,10 @@ import { NativeStorage } from '@ionic-native/native-storage';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
-    //LoginPage,
-    //PictureproofPage
-    //DocscanPage
+    HomePage,
+    LoginPage,
+    PictureproofPage,
+    DocscanPage
 
   ],
   imports: [
