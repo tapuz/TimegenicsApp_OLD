@@ -79,8 +79,10 @@ export class PictureproofPage {
   }
 
   getActivePatient(email){
-        
+        email = "thierry.duhameeuw@gmail.com";
         console.log('this is the email: ' + email);
+        console.log('getting the patient');
+        console.log(Config.APM_API_URL + '?task=getActivePatient&userEmail='+email);
         this.data = this.http.get(Config.APM_API_URL + '?task=getActivePatient&userEmail='+email).map(res => res.json());
         this.data.subscribe(data => {
         this.activePatient = data;

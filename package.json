@@ -20,6 +20,8 @@
     "@angular/http": "5.0.3",
     "@angular/platform-browser": "5.0.3",
     "@angular/platform-browser-dynamic": "5.0.3",
+    "@capacitor/core": "2.0.1",
+    "@capacitor/ios": "^2.0.1",
     "@ionic-native/camera": "^4.5.3",
     "@ionic-native/core": "^4.17.0",
     "@ionic-native/file": "^4.17.0",
@@ -52,6 +54,7 @@
     "zone.js": "0.8.26"
   },
   "devDependencies": {
+    "@capacitor/cli": "2.0.1",
     "@ionic/app-scripts": "3.2.1",
     "@ionic/lab": "1.0.15",
     "typescript": "2.4.2"
