@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="be.tapuz.apm" version="0.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.timegenics.app" version="0.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>APM</name>
     <description>AlicePatientManagement </description>
-    <author email="thierry.duhameeuw@gmail.com" href="www.tapuz.be">Thierry Duhameeuw</author>
+    <author email="thierry.duhameeuw@gmail.com" href="www.timegenics.com">Thierry Duhameeuw</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

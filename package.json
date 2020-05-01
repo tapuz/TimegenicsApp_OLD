@@ -1,8 +1,8 @@
 {
-  "name": "APM",
-  "version": "0.0.3",
+  "name": "Timegenics",
+  "version": "0.1",
   "author": "Thierry Duhameeuw",
-  "homepage": "http://www.tapuz.be/",
+  "homepage": "http://www.timegenics.com/",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",

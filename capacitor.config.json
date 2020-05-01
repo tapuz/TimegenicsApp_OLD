@@ -1,6 +1,6 @@
 {
-  "appId": "be.tapuz.apm",
-  "appName": "APM",
+  "appId": "com.timegenics.app",
+  "appName": "Timegenics",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
