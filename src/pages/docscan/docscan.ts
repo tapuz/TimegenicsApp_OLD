@@ -45,7 +45,7 @@ export class DocscanPage {
     private camera: Camera, 
     private transfer: FileTransfer, 
     private loadingCtrl:LoadingController,
-    private alertCtrl: AlertController,
+    private alertController: AlertController,
     public wordpressService: WordpressService,
     public http: Http,
     public authenticationService: AuthenticationService) {
@@ -65,7 +65,9 @@ export class DocscanPage {
         this.activePatient = data;
         this.patientName = data.patient_surname + ' ' + data.patient_firstname;
         this.patientID = data.patient_id;
-        
+    
+      },(error: any) => {
+        this.presentAlert('Could not connect to Timegenics. Check your internet connection');
         
     });
   }
@@ -77,6 +79,9 @@ export class DocscanPage {
         this.patientID = data.patient_id;
         //clear the pictures
         this.pictures = [];
+        refresher.complete();
+      },(error: any) => {
+        this.presentAlert('Could not connect to Timegenics. Check your internet connection');
         refresher.complete();
     });
     
@@ -164,6 +169,14 @@ export class DocscanPage {
         //loader.dismiss();
       });
     
+  }
+
+  async presentAlert(msg) {
+    const alert = this.alertController.create({
+      message: msg,
+      buttons: ['OK'],
+    })
+    alert.present();
   }
 
   ionViewDidLoad() {

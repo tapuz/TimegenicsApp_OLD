@@ -14,6 +14,16 @@
       "filename" : "splash-2.png",
       "idiom" : "iphone",
       "scale" : "3x"
+    },
+    {
+      "filename" : "splash-3.png",
+      "idiom" : "ipad",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "splash-4.png",
+      "idiom" : "ipad",
+      "scale" : "2x"
     }
   ],
   "info" : {

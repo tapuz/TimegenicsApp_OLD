@@ -13,7 +13,12 @@
       "FadeSplashScreenDuration": "300",
       "SplashShowOnlyFirstTime": "false",
       "SplashScreen": "screen",
-      "SplashScreenDelay": "2000"
+      "SplashScreenDelay": "5000",
+      "launchAutoHide": false
     }
+  },
+  "server": {
+    "url": "http://192.168.0.26:8100",
+    "cleartext": true
   }
 }

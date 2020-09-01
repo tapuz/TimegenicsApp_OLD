@@ -10,6 +10,7 @@ import io from 'socket.io-client';
 import { WordpressService } from '../../services/wordpress.service';
 import { AuthenticationService } from '../../services/authentication.service';
 
+
 import { Http, Headers } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
@@ -40,7 +41,7 @@ export class PictureproofPage {
     private camera: Camera, 
     private transfer: FileTransfer, 
     private loadingCtrl:LoadingController,
-    private alertCtrl: AlertController,
+    private alertController: AlertController,
     public wordpressService: WordpressService,
     public http: Http,
     public authenticationService: AuthenticationService
@@ -89,7 +90,10 @@ export class PictureproofPage {
         this.patientID = data.patient_id;
         console.log(data.patient_id + ' is the ids');
         
+    },(error: any) => {
+      this.presentAlert('Could not connect to Timegenics. Check your internet connection');
     });
+
   }
 
   refreshActivePatient(refresher) {
@@ -99,17 +103,23 @@ export class PictureproofPage {
         this.patientID = data.patient_id;
         //clear the pictures
         this.pictures = [];
+        this.footermsg= 'system ready..';
         refresher.complete();
+        
+    },(error: any) => {
+      this.presentAlert('Could not connect to Timegenics. Check your internet connection');
+      refresher.complete();
     });
     
   }
 
-  presentAlert(title) {
-  let alert = this.alertCtrl.create({
-    title: title
-   
-  });
-  alert.present();
+
+  async presentAlert(msg) {
+    const alert = this.alertController.create({
+      message: msg,
+      buttons: ['OK'],
+    })
+    alert.present();
   }
 
   takePhoto(){

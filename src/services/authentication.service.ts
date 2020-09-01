@@ -34,7 +34,8 @@ export class AuthenticationService {
   }
 
   doLogin(username, password){
-    return this.http.post(Config.WORDPRESS_URL + 'wp-json/jwt-auth/v1/token',{
+    //return this.http.post(Config.WORDPRESS_URL + 'wp-json/jwt-auth/v1/token',{
+    return this.http.post('https://www.timegenics.com/wp-json/jwt-auth/v1/token',{  
       username: username,
       password: password
     })
